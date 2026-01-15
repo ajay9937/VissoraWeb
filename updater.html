@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="fonts.css">
+	<title>Vissora updater</title>
+	<style>
+		*{
+			margin: 0;
+			outline: none;
+			font-family: berlin sans fb;
+		}
+		body{
+			background: #f2f3f5;
+			text-align: center;
+		}
+		.flex{
+		    width:40%;
+		    display: flex;
+		    flex-flow: row nowrap;
+		    align-items: center;
+		    column-gap: 20px;
+		}
+		big{
+			font-family: google sans;
+			font-weight: bold;
+			font-size: 30px;
+			word-spacing: 3px;
+			display: block;
+			margin: 50px 0 60px;
+		}
+		.inp_box{
+		    width: 40%;
+		    padding: 10px;
+		    display: flex;
+		    box-sizing: border-box;
+		    background: #cccccc;
+		    margin: 20px 30%;
+		    align-items: center;
+		    justify-content: flex-start;
+		    border-radius: 10px;
+		}
+		.inp_box img{
+		    width: 30px;
+		    height: 30px;
+		    filter: invert(.2)
+		}
+		.inp_box input{
+		    width: 90%;
+		    padding: 5px 15px;
+		    box-sizing: border-box;
+		    font-family: poppins; 
+		    color: #333333;
+		    font-size: 16px;
+		    border: 0;
+		    background: transparent;
+		}
+		.flex .inp_box{
+			margin: 0;
+		}
+		button{
+			padding: 10px 15px;
+			background: #202020;
+			color:white;
+			border: 0;
+			border-radius: 5px;
+		}
+		.icon{
+			width: 40px;
+			height: 40px;
+			background-position: center;
+			background-size: 80% 80%;
+			background-color: #cccccc;
+			border-radius: 5px;
+			background-repeat: no-repeat;
+			background-image: url(Img/camera.png);
+		}
+		.alert{
+			width: 80vw;
+			height: 25vh;
+			top:25vh;
+			left:10vw;
+			background: white;
+			position: fixed;
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+			justify-content: center;
+			z-index: 6;
+			padding: 20px;
+			box-sizing: border-box;
+			border-radius: 15px;
+			overflow: hidden;
+			row-gap: 30px;
+			opacity: 0;
+			pointer-events: none;
+			transition: .5s;
+		}
+		.alert p{
+			font-size: 16px;
+			color:#cccccc;
+			font-family: manrope;
+		}
+		.box{
+			width:35px;
+			height: 35px;
+			border-radius: 50%;
+			border:4px solid #cccccc;
+			border-color: cyan #333333 #333333;
+			animation: move 1s linear infinite;
+		}
+		.screen{
+			width: 100vw;
+			height: 100vh;
+			position: fixed;
+			background: rgba(255,255,255, .5);
+			z-index: 5;
+			top:0;
+			opacity: 0;
+			backdrop-filter: blur(5px);
+			pointer-events: none;
+			transition: .5s;
+		}
+	</style>
+</head>
+<body>
+	<big>Vissora updater</big>
+	<div class="inp_box">
+		<img src="Img/people.png">
+		<input placeholder="Institution">
+	</div>
+	<div class="flex" style="margin:0 30%">
+		<div class="inp_box" style="width: auto;">
+			<img src="Img/search.png">
+			<input placeholder="Section">
+		</div>
+		<div class="inp_box" style="width: auto;">
+			<img src="Img/section.png">
+			<input placeholder="Roll">
+		</div>
+	</div>
+	<div class="inp_box">
+		<img src="Img/person.png">
+		<input placeholder="Full name">
+	</div>
+	<div class="flex" style="column-gap: 0; justify-content: space-between; margin: 0 30%;">
+		<div class="flex" style="width: auto">
+			<div class="icon"></div>
+			<div class="icon" style="background-image: url(Img/choose.png)"></div>
+		</div>
+		<div class="flex" style="width: auto">
+			<button style="filter: invert(1);">RESET</button>
+			<button style="background: #3f48cc;">SUBMIT</button>
+		</div>
+	</div>
+	<input type="file" style="display: none;">
+	<div class="screen"></div>
+	<div class="alert">
+		<div class="box"></div>
+		<p>Sending Request..</p>
+	</div>
+</body>
+<script>
+	document.querySelectorAll(".icon")[0].addEventListener("click", () => {
+		document.querySelectorAll("input")[4].setAttribute("capture", "camera");
+		document.querySelectorAll("input")[4].click();
+	});
+	document.querySelectorAll(".icon")[1].addEventListener("click", () => {
+		document.querySelectorAll("input")[4].removeAttribute("capture");
+		document.querySelectorAll("input")[4].click();
+	});
+	document.querySelectorAll("button")[1].addEventListener("click", () => {
+		if(document.querySelectorAll("input")[4].files.length == 0){
+			alert("Upload an image");
+			return;
+		}
+		if((document.querySelectorAll("input")[4].files[0].size / 1024) >= 4 * 1024){
+			alert("Upload image less than 4 MB.");
+			return;
+		}
+		var inst = document.querySelectorAll("input")[0].value.toUpperCase();
+		var sect = document.querySelectorAll("input")[1].value.toUpperCase();
+		var rl = document.querySelectorAll("input")[2].value.toUpperCase();
+		try{
+			rl = parseInt(rl).toString();
+		}catch{
+			alert("Invalid roll");
+			return;
+		}
+		var name = document.querySelectorAll("input")[3].value.toUpperCase();
+
+		if(inst.trim() == "" | sect.trim() == "" | rl.trim() == "" | name.trim() == ""){
+			alert("Some of the fields are empty");
+		}
+		var formData = new FormData();
+    	formData.append("image", document.querySelectorAll("input")[4].files[0]);
+    	formData.append("inst", inst);
+    	formData.append("sec", sect);
+    	formData.append("roll", rl);
+    	formData.append("name", name);
+    	document.querySelector(".alert").style = "opacity:1; pointer-events:auto";
+    	document.querySelector(".screen").style = "opacity:1; pointer-events:auto";
+    	fetch("http://localhost:8000/update", {           
+	        method: "POST",
+	        body: formData
+	    })
+	    .then(response => response.text())
+	    .then(data => {
+	        document.querySelector(".alert").style = "opacity:0; pointer-events:none";
+    		document.querySelector(".screen").style = "opacity:0; pointer-events:none";
+			setTimeout(() => {
+				alert(data);
+			},500);
+	    })
+	    .catch(error => err(error));
+	});
+</script>
+</html>

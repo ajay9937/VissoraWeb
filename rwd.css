@@ -1,0 +1,145 @@
+@media screen and (max-width: 1000px){
+	.banner p{
+		font-size: 2vw;
+	}
+	.banner button{
+		font-size: 1.8vw;
+	}
+	button{
+		font-size: 1.8vw;
+	}
+	.card big{
+		font-size: 3vw;
+	}
+	.schools > div{
+		width: 70%;
+	}
+	address{
+		font-size: 3vw;
+	}
+	.icons strong{
+		font-size: 3.5vw;
+	}
+	.icons img{
+		width: 4vw;
+		height: 4vw;
+	}
+	.icons p{
+		font-size: 2.5vw;
+	}
+	.footer{
+		margin-top: 20vh;
+	}
+}
+
+@media screen and (max-width: 800px){
+	.cards{
+		flex-flow: column nowrap;
+		row-gap: 20px;
+	}
+	.footer{
+		margin-top: 20vh;
+		column-gap: 30vw;
+	}
+	.footer p{
+		font-size: 2vw;
+	}
+	.footer strong{
+		font-size: 2.4vw;
+	}
+	.footer > div{
+		row-gap: 2vw;
+	}
+	.banner{
+		padding: 1vw 5vw;
+	}
+	#lis{
+		padding: 6vw;
+	}
+	.icon{
+		width: 15vw;
+		height: 15vw;
+	}
+	.container{
+		padding: 30vh 0 0;
+	}
+	address{
+		margin: 10vh 20vw;
+	}
+	big{
+		font-size: 5vw;
+	}
+	b{
+		font-size: 4vw;
+	}
+	strong{
+		font-size: 2.5vw;
+	}
+	.title{
+		transform: scale(.8);
+		margin-bottom: 0;
+	}
+	.icons > div{
+		column-gap: 1vw;
+	}
+	p{
+		font-size: 2vw;
+	}
+	address{
+		font-size: 3vw;
+	}
+}
+@media screen and (max-width: 700px){
+	.container{
+		padding: 25vh 0 0;
+	}
+}
+@media screen and (max-width: 600px){
+	.card img{
+		width: 3vw;
+		height: 3vw;
+	}
+	.banner p{
+		font-size: 3vw;
+	}
+	.banner button{
+		font-size: 2.5vw;
+	}
+	.card .flex{
+		font-size: 3vw;
+	}
+	p{
+		font-size: 3vw;
+	}
+	.lic{
+		flex-flow: column-reverse;
+		row-gap: 20px;
+	}
+	.footer{
+		justify-content: center;
+		column-gap: 20vw;
+	}
+	.footer p{
+		font-size: 3vw;
+	}
+	.footer strong{
+		font-size: 3.5vw;
+	}
+	button{
+		padding: 2vw 4vw;
+	}
+}
+@media screen and (max-width: 400px){
+	.title{
+		transform: scale(.65);
+	}
+	.container{
+		padding: 12vh 0 0;
+	}
+	.banner p{
+		font-size: 3.5vw;
+	}
+	button{
+		font-size: 2.5vw;
+	}
+}

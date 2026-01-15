@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VISSORA: Vision Beyond Presence</title>
+	<link rel="icon" href="Img/vissora.png" type="image/png">
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="fonts.css">
+	<style>
+		@keyframes enlarge{
+			from{
+				transform: scale(1.0);
+				opacity: 1;
+			}
+			to{
+				transform: scale(25.0);
+				opacity: 0;
+			}
+		}
+		.container{
+			display: grid;
+			grid-template-columns: 50% 50%;
+			box-sizing: border-box;
+		}
+		.container .flex > img{
+			width: 20px;
+			height: 20px;
+		}
+		.inp{
+			background: #333333;
+			padding: 13px 15px;
+			border-radius: 15px;
+			display: flex;
+			column-gap: 10px;
+			margin-top: 20px;
+			box-sizing: border-box;
+		}
+		.schools > div{
+			width: 60%;
+		}
+		.inp input{
+			width: fit-content;
+			color:#cccccc;
+			font-family: google sans;
+			font-weight: bold;
+			letter-spacing: .5px;
+			background: transparent;
+			border:0;
+			font-size: 14px;
+		}
+		.schools{
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+			padding:0px;
+			box-sizing: border-box;
+		}
+		.schools big{
+			font-size: 25px;
+			margin-bottom: 20px;
+		}
+		.container button{
+			font-size: 12px;
+			padding: 7px 12px;
+			border-radius: 5px;
+			background: #8080ff;		
+			letter-spacing: .5px;
+			font-family: poppins;
+			display: flex;
+			align-items: center;
+		}
+		.data{
+			text-align: right;
+		}
+		.list{
+			width: 80%;
+			max-height: 50vh;
+			overflow: scroll;
+		}
+		.list > div{
+			text-align: center;
+			display: grid;
+			grid-template-columns: 25% 50% 25%;
+			margin: 10px 0;
+			background: #333333;
+			padding: 5px 0;
+			border-radius: 3px;
+			--color: white;
+		}
+		.list p{
+			color: var(--color);
+			font-size: 14px;
+		}
+		.loader{
+			position: fixed;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.75);
+			backdrop-filter: blur(4px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 3;
+			opacity: 0;
+			pointer-events: none;
+			transition: .5s;
+		}
+		.loader div{
+			width: 10px;
+			height: 10px;
+			border-radius: 100%;
+			background: #8080ff;
+			animation: enlarge 3s linear infinite;
+			position: absolute;
+		}
+		.time{
+			font-size: 16px;
+			font-family: google sans;
+			color:white;
+		}
+		.banner p{
+			font-size: 18px;
+			color: white;
+		}
+		button img{
+			width: 15px;
+			height: 15px;
+			margin-right: 10px;
+			filter: invert(1);
+		}
+		.footer{
+			width: 100vw;
+			padding: 5vw 10vw;
+			box-sizing: border-box;
+			background: #999999;
+			margin-top: 25vh;
+			display: flex;
+			column-gap: 200px;
+			justify-content: flex-start;
+			align-items: center;
+			text-align: left;
+		}
+		.footer > div{
+			row-gap: 20px;
+		}
+		address{
+			font-size: 1.8vw;
+		}
+		.footer strong{
+			color: black;
+			font-size: 1.75vw;
+		}
+		.footer > div > div{
+			display: flex;
+			flex-flow: column nowrap;
+			row-gap: 15px;
+			cursor: pointer;
+			transition: .25s ease;
+		}
+		.footer > div > div:hover{
+			transform: scale(1.1);
+		}
+		.footer img{
+			width: 2vw;
+			height: auto;
+		}
+		.footer p{
+			color:black;
+			font-size: 1.5vw;
+			font-weight: bold;
+		}
+		.all_students{
+			height: 70vh;
+			overflow-y: scroll;
+			overflow-x: hidden;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="rwd.css">
+	<style>
+		@media screen and (max-width: 850px){
+			.container{
+				display: flex;
+				flex-flow: column nowrap;
+				row-gap: 3vh;
+				padding: 15vh 0 0;
+			}
+			.list{
+				width: 90%;
+				margin-left: 5%;
+			}
+			.schools big{
+				font-size: 5vw;
+			}
+		}
+		@media screen and (max-width: 800px){
+			.schools > div{
+				width: 50%;
+			}
+			.inp input{
+				font-size: 12px;
+			}
+			.container .flex img{
+				width: 3vw;
+				height: 3vw;
+			}
+			.container button{
+				font-size: 10px;
+				padding: 5px 10px;
+			}
+		}
+		@media screen and (max-width: 600px){
+			.list{
+				height: 50vh;
+			}
+		}
+		@media screen and (max-width: 500px){
+			.schools big{
+				margin-bottom: 0;
+			}
+			.inp{
+				padding: 10px 12px;
+			}
+			.schools > div{
+				width: 70%;
+			}
+			.container .flex img{
+				width: 4vw;
+				height: 4vw;
+			}
+			.list p{
+				font-size: 10px;
+			}
+		}
+	</style>
+</head>
+<body onload="getList()">
+	<div class="loader">
+		<div class="wheel1"></div>
+		<div class="wheel1" style="animation-delay: 1s;"></div>
+	</div>
+	<input type="date" id="date" style="display: none;position: absolute;">
+	<div class="banner">
+		<div class="flex"><img src="Img/vissora.png"class="icon"draggable=false></div>
+		<div class="flex"style="column-gap: 20px;"><p class="cont" onclick="location.href='index.html';">Home</p><p class="cont" style="color: #8080ff">Dashboard</p></div>
+	</div>
+	<div class="container">
+		<div class="schools">
+			<big>LOGIN</big>
+			<div class="flex inp">
+				<img src="Img/map.png">
+				<input placeholder="Institution" class="inst">
+			</div>
+			<div class="flex" style="justify-content: space-between;align-items: center;column-gap: 5%;">
+				<div class="flex inp" style="width: 47.5%">
+					<img src="Img/mag.png">
+					<input placeholder="Section" class="sec" style="width: 60%">
+				</div>
+				<div class="flex inp" style="width: 47.5%" onclick="$('#date').showPicker();">
+					<img src="Img/calendar.png">
+					<input placeholder="24-12-25" readonly="true" class="picker" style="width: 60%">
+				</div>
+			</div>
+			<div class="flex" style="margin: 40px; justify-content: center; column-gap: 10px;">
+				<button style="background: #333333; color: #cccccc" onclick="clearInput()">CLEAR</button>
+				<button onclick="search()">SEARCH</button>
+			</div>
+		</div>
+		<div style="display: none;" class="tmp">
+			<div style="background: transparent;">
+				<p>Roll no.</p>
+				<p>Student</p>
+				<p>Status</p>
+			</div>
+		</div>
+		<div class="data">
+			<div class="list">
+				<div style="background: transparent;">
+					<p>Roll no.</p>
+					<p>Student</p>
+					<p>Status</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="flex"style="flex-flow: column nowrap;align-items: flex-start;">
+				<div>
+					<div class="flex"style="column-gap: 30px;align-items: center;"><img src="Img/email.png"draggable=false><p>vissora@anvpy.com</p></div>
+				</div>
+				<div>
+					<div class="flex"style="column-gap: 30px;align-items: center;"><img src="Img/call.png"draggable=false><p>+919827601360, +917750055149</p></div>
+				</div>
+				<div>
+					<div class="flex"style="column-gap: 30px;align-items: center;"><img src="Img/office.png"draggable=false><p>Bhubaneswar, Odisha</p></div>
+				</div>
+			</div>	
+			<div class="flex"style="flex-flow: column nowrap;align-items: flex-start;">
+				<strong>Follow us</strong>
+				<div>
+					<div class="flex"style="column-gap: 30px;align-items: center;"><img src="Img/x.png"draggable=false><p>X.com</p></div>
+				</div>
+				<div>
+					<div class="flex"style="column-gap: 30px;align-items: center;"><img src="Img/instagram.png"draggable=false><p>Instagram</p></div>
+				</div>
+				<div>
+					<div class="flex"style="column-gap: 30px;align-items: center;"><img src="Img/facebook.png"draggable=false><p>Facebook</p></div>
+				</div>
+				<div>
+					<div class="flex"style="column-gap: 30px;align-items: center;"><img src="Img/reddit.png"draggable=false><p>Reddit</p></div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+<script>
+	$(".loader").style = "opacity: 1; pointer-events: auto";
+	var obj, y, m, d;
+	function $(val){
+		return document.querySelector(val);
+	}
+	$("#date").style = `position:fixed; opacity:0; left:${$(".picker").offsetLeft + 30}px; top:${$(".picker").offsetTop}px`;
+	function clearInput(){
+		document.querySelectorAll("input")[1].value = "";
+		document.querySelectorAll("input")[2].value = "";
+	}
+	function search(){
+		$(".loader").style = "opacity: 1; pointer-events: auto";
+		let dt = $(".picker").value.split("-");
+		params = {"collegeName": $(".inst").value, "className": $(".sec").value, "date": Date.UTC(y, m, d) / 1000}
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", `https://vissora.onrender.com/getRoll?maxResult=1&collegeName=${encodeURIComponent($(".inst").value)}&className=${encodeURIComponent($(".sec").value)}&date=${Date.UTC(parseInt(dt[0]), parseInt(dt[1]) - 1, parseInt(dt[2])) / 1000}`, true);
+		console.log(`https://vissora.onrender.com/getRoll?maxResult=1&collegeName=${encodeURIComponent($(".inst").value)}&className=${encodeURIComponent($(".sec").value)}&date=${Date.UTC(parseInt(dt[0]), parseInt(dt[1]) - 1, parseInt(dt[2])) / 1000}`);
+		xhr.setRequestHeader("x-api-key", "IPvDyV20bVryk9d5g_S7pkDXvI0x53BTSW1_WQQN2DE");
+		xhr.send();
+		xhr.onreadystatechange = function(){
+			if(this.readyState == 4 && this.status == 200){
+				obj = JSON.parse(this.responseText);
+				adds(obj["data"][0]["d"]);
+				$(".loader").style = "";
+			}
+			else{
+				$(".loader").style = "";
+			}
+		}
+	}
+	$("#date").addEventListener("change", () => {
+	    $(".picker").value = $("#date").value;
+	});
+	data = {"1":["Amar", "P"], "2":["bubu", "A"], "3":["dugu", "A"]};
+	function addStudent(data){
+		$(".list").innerHTML = $(".tmp").innerHTML;
+		Object.keys(data).forEach((val, index) => {
+			let div = document.createElement("div");
+			div.innerHTML = $(".list").children[0].innerHTML;
+			div.children[0].innerHTML = val;
+			div.children[1].innerHTML = data[val][0];
+			div.children[2].style.fontWeight = "bolder";
+			if(index % 2 != 0){
+				div.style.background = "#999999";
+				div.style.setProperty("--color", "black");
+			}
+			if(data[val][1] == "A"){
+				div.children[2].innerHTML = "Absent";
+				div.children[2].style.color = "black";
+				div.style.background = "salmon";
+				div.style.setProperty("--color", "black");
+			}
+			else{
+				div.children[2].innerHTML = "Present";
+				div.children[2].style.color = "#8080ff";
+			}
+			$(".list").appendChild(div);
+		});
+	}
+	function adds(val){
+		$(".list").innerHTML = $(".tmp").innerHTML;
+		val.forEach((roll, index) => {
+			let div = document.createElement("div");
+			div.innerHTML = $(".list").children[0].innerHTML;
+			div.children[0].innerHTML = roll;
+			div.children[1].innerHTML = "N/A";
+			div.children[2].innerHTML = "Absent";
+			if(index % 2 != 0){
+				div.style.background = "#999999";
+				div.style.setProperty("--color", "black");
+			}
+			$(".list").appendChild(div);
+		});
+	}
+	//addStudent(data);
+	function getList(){
+		data = ["Silicon", "ss", "S"];
+	}
+	function getData(){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "https://vissora.onrender.com/getCollegeNames", true);
+		xhr.setRequestHeader("x-api-key", "IPvDyV20bVryk9d5g_S7pkDXvI0x53BTSW1_WQQN2DE");
+		xhr.send();
+
+		xhr.onreadystatechange = function(){
+			if(this.readyState == 4){
+				if(this.status == 200){
+					obj = JSON.parse(this.responseText);
+					let list = document.createElement("datalist");
+					list.id = "institution";
+					let sec = document.createElement("datalist");
+					sec.id = "sec";
+					obj["data"].forEach((val) => {
+						const option = document.createElement("option");
+					    option.value = val["b"];
+					    list.appendChild(option);
+					});
+					document.body.appendChild(list);
+					document.body.appendChild(sec);
+					$(".inst").setAttribute("list", "institution");
+					$(".sec").setAttribute("list", "sec");
+					$(".loader").style = "";
+				}
+				else{
+					setTimeout(() => {getData();}, 3000);
+				}
+			}
+		}
+	}
+	$(".sec").addEventListener("click", () => {
+		let sec = $("#sec");
+		sec.innerHTML = "";
+		for(i = 0; i < obj["data"].length; i++){
+			if(obj["data"][i]["b"] == $(".inst").value){
+				obj["data"][i]["c"].forEach((v) => {
+					const option = document.createElement("option");
+					option.value = v;
+					sec.appendChild(option);
+				});
+				break;
+			}
+		}
+	});
+	getData();
+</script>
+</html>

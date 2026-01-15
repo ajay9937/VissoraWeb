@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VISSORA: Vision Beyond Presence</title>
+	<link rel="icon" href="Img/vissora_black.png" type="image/png">
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="fonts.css">
+	<link rel="stylesheet" type="text/css" href="rwd.css">
+</head>
+<body>
+	<div class="banner">
+		<div class="flex"><img src="Img/vissora.png"class="icon"draggable=false></div>
+		<div class="flex"style="column-gap: 20px;"><p class="cont" style="color: #8080ff">Home</p><p onclick="location.href='dashboard.html'">Dashboard</p></div>
+	</div>
+	<div class="container">
+		<div class="flex title"><big>viss</big><img src="Img/click.png"class="txt"draggable=false><big>ra</big></div>
+		<strong style="margin-bottom: 3vw;display: block;">Vision Beyond <span style="color: #8080ff">Presence.</span></strong><br>
+		<big style="margin-bottom: 2vw;display: block;">AI that sees possibilities where <br>others see limits.</big><br>
+		<p style="margin-bottom: 4vw;display: block;" class="title">Vissora analyzes camera data in real time, converting human movement and presence into actionable intelligence.</p> 
+		<button style="margin: 50px 0 5vw;" onclick="sendMail()">Book Free Trial</button>
+		<div class="flex icons">
+			<div class="flex">
+				<div>
+					<img src="Img/schools.png">
+					<p>Schools</p>
+				</div>
+				<strong id="schools">0</strong>
+			</div>
+			<div class="flex">
+				<div>
+					<img src="Img/class.png">
+					<p>Classes</p>
+				</div>
+				<strong id="classes">0</strong>
+			</div>
+			<div class="flex">
+				<div>
+					<img src="Img/woman.png">
+					<p>Teachers</p>
+				</div>
+				<strong id="teachers">0</strong>
+			</div>
+		</div>
+		<div class="flex cards"style="column-gap: 50px;width: 80vw;margin: 0 10vw 50px;">
+			<div class="card"style="flex-flow: column nowrap;">
+				<big style="text-align: center;width:100%;color:white">Vissora</big>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/check.png"class="check">Works directly on Android and iOS. No setup, no manual installation, no extra devices required.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/check.png"class="check">Can recognize multiple faces at the same time, making it faster and more practical.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/check.png"class="check">Very affordable, making it accessible for schools, offices, shops, and small businesses.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/check.png"class="check">100% offline support, so it works anywhere even without network coverage.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/check.png"class="check">Performs consistently in cities, rural areas, and low connectivity locations. </div>
+				
+			</div>
+			<div class="card"style="flex-flow: column nowrap;">
+				<big style="text-align: center;width:100%;color:white">Other AI Software</big>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/close.png"class="check">Requires separate IoT hardware, complex setup, and regular maintenance.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/close.png"class="check">Usually detects only one face at a time, slowing down the process.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/close.png"class="check">Expensive, often unsuitable for small or medium-scale users.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/close.png"class="check">Needs a stable internet connection, which may not always be available.</div>
+				<div class="flex"style="column-gap: 20px;"><img src="Img/close.png"class="check">Performance drops when internet or hardware fails with additional maintainance support.</div>
+				
+			</div>
+		</div>
+		<b style="margin: 5vw 0 3vw;display: block;">Past Results</b>
+		<div class="card" id="grid" style="width: 100%; margin: 0;">
+			<img src="Img/arrow-left.png" onclick="left()">
+			<div></div>
+			<img src="Img/arrow-right.png" onclick="right()">
+		</div>
+		<address>"Is your institution the next to go digital with smart attendance and automation?"</address>
+		<div class="card"id="lis">
+			<big>License</big>
+			<div class="flex lic"style="column-gap: 50px;align-items: center;">
+				<p><span style="color: #8080ff">Vissora</span> is built-on top of <span style="color: #8080ff">AnvPy</span> technology, it's responible to all the tasks undergo during the business, and the liscence and ip is protected under anvpy. This product is a sincere example of AnvPy Technology, and all of the business under this product is supported and maintained by AnvPy.</p>
+				<img src="Img/anvpy.png"class="anv"draggable=false>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="flex"style="flex-flow: column nowrap;align-items: flex-start;">
+				<div>
+					<div class="flex"style="align-items: center;"><img src="Img/email.png"draggable=false><p>vissora.official@gmail.com</p></div>
+				</div>
+				<div>
+					<div class="flex"style="align-items: center;"><img src="Img/call.png"draggable=false><p>+917750055149</p></div>
+				</div>
+				<div>
+					<div class="flex"style="align-items: center;"><img src="Img/office.png"draggable=false><p>Bhubaneswar, Odisha</p></div>
+				</div>
+			</div>	
+			<div class="flex"style="flex-flow: column nowrap;align-items: flex-start;">
+				<strong>Follow us</strong>
+				<div>
+					<div class="flex"style="align-items: center;"><img src="Img/x.png"draggable=false><p>X.com</p></div>
+				</div>
+				<div>
+					<div class="flex"style="align-items: center;"><img src="Img/instagram.png"draggable=false><p>Instagram</p></div>
+				</div>
+				<div>
+					<div class="flex"style="align-items: center;"><img src="Img/facebook.png"draggable=false><p>Facebook</p></div>
+				</div>
+				<div>
+					<div class="flex"style="align-items: center;"><img src="Img/reddit.png"draggable=false><p>Reddit</p></div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</body>
+<script>
+	var index = 0;
+	function $(val){
+		return document.querySelector(val);
+	}
+	$(".cont").addEventListener("click", () => {
+		//$(".container").scrollTop = $(".container").scrollHeight;
+	});
+	var h1 = $(".cards").children[0].offsetHeight;
+	var h2 = $(".cards").children[0].offsetHeight;
+	let max = Math.max(h1, h2);
+	$(".cards").children[0].style.height = max + "px";
+	$(".cards").children[1].style.height = max + "px";
+
+	timeout = null;
+	function left(){
+		index = (index - 1 + 6) % 6;
+		$("#grid").children[1].style.backgroundImage = `url(results/class${index}.jpg)`;
+	}
+	function right(){
+		index = (index + 1) % 6;	
+		$("#grid").children[1].style.backgroundImage = `url(results/class${index}.jpg)`;
+	}
+	var schools = 0, classes = 0, teachers = 0, interval;
+	const observer = new IntersectionObserver((entries) => {
+	    entries.forEach(entry => {
+	        if (entry.isIntersecting) {
+	        	interval = setInterval(() => {
+					if(schools >= 25){
+						$("#schools").innerHTML = "25+";
+					}
+					else{
+						schools += .25;
+						$("#schools").innerHTML = parseInt(schools);
+					}
+					if(classes >= 450){
+						$("#classes").innerHTML = "450+";
+					}
+					else{
+						classes += 4.5;
+						$("#classes").innerHTML = parseInt(classes);
+					}
+					if(teachers >= 700){
+						$("#teachers").innerHTML = "700+";
+					}
+					else{
+						teachers += 7;
+						$("#teachers").innerHTML = parseInt(teachers);
+					}
+					if($("#schools").innerHTML == "25+"){
+						clearInterval(interval);
+					}
+				}, 10);
+	        }
+	    });
+	}, {
+	    threshold: 0.5
+	});
+	observer.observe($(".icons"));
+	function sendMail() {
+    const to = "vissora.official@gmail.com";
+    const subject = "Request for Free Trial – Vissora";
+
+    const body = `Hello Vissora Team,
+
+I hope this message finds you well.
+
+I am writing to request a free trial and demo of the Vissora platform for our institution. We are interested in understanding how Vissora can support our academic and administrative requirements and would appreciate a detailed walkthrough of its features.
+
+Please find our details below:
+
+Institution Name:
+Type of Institution (School / College / University / Other):
+Location (City, State, Country):
+
+Contact Person Name:
+Designation:
+Email Address:
+Phone Number:
+
+Preferred Time for Demo (if any):
+
+Kindly let us know the next steps to proceed with the free trial and demo. We look forward to your response.
+
+Thank you for your time and support.
+
+Best regards,
+[Your Name]`;
+
+    const mailtoLink =
+        `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoLink;
+}
+
+</script>
+</html>

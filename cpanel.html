@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VISSORA: Vision Beyond Presence</title>
+	<link rel="icon" href="Img/v.png" type="image/png">
+	<link rel="stylesheet" href="fonts.css">
+	<style>
+		*{
+			margin: 0;
+			outline: none;
+			scrollbar-width: none;
+			font-family: sand;
+		}
+		::selection {
+			background: #8080ff;
+			color:black;
+		}
+		body{
+			background: #202020;
+			text-align: center;
+			overflow: hidden;
+			padding: 0 10vw;
+			box-sizing: border-box;
+		}
+		.flex{
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.banner{
+			width:100%;
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			justify-content: space-between;
+			padding: 25px 0;
+			box-sizing: border-box;
+		}
+		.icon{
+			width:60px;
+			height: 60px;
+			margin-right: 30px;
+		}
+		.banner big{
+			font-size: 40px;
+			font-family: sand;
+			color:#e6e6e6;
+		}
+		.txt{
+			width:25px;
+			height:25px;
+			margin: 0 .5px;
+			margin-top: 6.5px;
+			animation: rot 10s linear infinite;
+		}
+		.banner p{
+			font-size: 20px;
+			font-family: google sans;
+			color: #cccccc;
+			letter-spacing: 1px;
+			cursor: pointer;
+			transition: .25s ease;
+		}
+		.banner p:hover{
+			color: #8080ff;
+		}
+		@keyframes rot{
+			from{transform: rotate(0deg) }
+			to{transform: rotate(360deg) }
+		}
+		.details{
+			text-align: left;
+			display: flex;
+			flex-flow: column nowrap;
+			row-gap: 5px;
+			align-items: flex-end;
+		}
+		.details big{
+			font-family: poppins;
+			font-size: 16px;
+			color: #cccccc;
+		}
+		.details p{
+			color: #999999;
+		}
+		.btn{
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			background: #8080ff;
+			color:black;
+			font-family: google sans;
+			font-size: 15px;
+			padding: 5px 10px;
+			border-radius: 5px;
+			cursor: pointer;
+			column-gap: 5px;
+		}
+		.btn img{
+			width: 20px;
+			height: 20px;
+			filter: brightness(0);
+		}
+		.inp{
+			width: 30%;
+			border:1px solid #333333;
+			display: flex;
+			align-items: center;
+			column-gap: 5px;
+			padding: 7px;
+			border-radius: 10px;
+		}
+		.inp img{
+			width: 20px;
+			height: 20px;
+			filter: invert(.3);
+		}
+		.inp input{
+			background: transparent;
+			border:0;
+			color: #cccccc;
+		}
+		.list{
+			width: 60vw;
+			margin: 30px 0;
+			display: grid;
+			grid-template-columns: 10vw 20vw 20vw 20vw;
+			align-items: center;
+		}
+		.list p{
+			color: white;
+		}
+		.list img{
+			width: 50px;
+			height: 50px;
+			border-radius: 10px;
+		}
+		.list p img{
+			width: 40px;
+			height: 40px;
+		}
+	</style>
+</head>
+<body>
+	<div class="banner">
+		<div class="flex"><img src="Img/v.png"class="icon"draggable=false><div class="flex"><big>viss</big><img src="Img/click.png"class="txt"draggable=false><big>ra</big></div></div>
+		<div class="details">
+			<big>Silicon Institute of Technology</big>
+			<p style="font-size: 14px">Class EEE-3A</p>
+		</div>
+	</div>
+	<div class="flex">
+		<div class="flex" style="width:fit-content;column-gap: 10px;">
+			<div class="btn"><img src="Img/plus.png">New Student</div>
+			<div class="btn" style="background: salmon"><img src="Img/logout.png">Log out</div>
+		</div>
+		<div class="inp">
+			<img src="Img/search.png"><input placeholder="Search in list">
+		</div>
+	</div>
+	<div class="list"style="margin-top: 10vh;">
+		<p></p><p style="color: #8080ff">Roll</p><p style="color: #8080ff">Name</p><p></p>
+	</div>
+	<div class="std">
+		<div class="list">
+			<img src="Img/37.jpg">
+			<p>1</p><p>Amar Kumar Sahu</p><p><img src="Img/trash.png"></p>
+		</div>
+		<div class="list">
+			<img src="Img/37.jpg">
+			<p>1</p><p>Amar Kumar Sahu</p><p><img src="Img/trash.png"></p>
+		</div>
+	</div>
+</body>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="fonts.css">
+	<title>Control Panel</title>
+	<style>
+		*{
+			margin: 0;
+			outline: none;
+		}
+		body{
+			background: #f2f3f5;
+		}
+		.banner{
+			background: rgba(0, 0, 0, 0.2);
+			backdrop-filter: blur(5px);
+			position: fixed;
+			width: 100vw;
+			padding: 20px;
+			box-sizing: border-box;
+			display: flex;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.icon{
+			width: 40px;
+			height: 40px;
+			background-position: center;
+			background-size: 80% 80%;
+			background-color: #cccccc;
+			border-radius: 5px;
+			background-repeat: no-repeat;
+			background-image: url(Img/cancel.png);
+		}
+		.data{
+			padding: 30px;
+			box-sizing: border-box;
+		}
+		.flex{
+			width:auto;
+			display: flex;
+			flex-flow: row nowrap;
+			align-items: center;
+			column-gap: 20px;
+		}
+		.container{
+			position: relative;
+			width: 100%;
+			display: grid;
+			grid-template-columns: 35% 65%;
+		}
+		.form{
+			padding: 0px 15% 0;
+			box-sizing: border-box;
+			display: flex;
+			flex-flow: column nowrap;
+			justify-content: center;
+			align-items: center;
+			background: #f2f3f5;
+		}
+		.inp_box{
+		    width: 100%;
+		    padding: 10px;
+		    display: flex;
+		    box-sizing: border-box;
+		    background: #cccccc;
+		    margin: 10px 30%;
+		    align-items: center;
+		    justify-content: flex-start;
+		    border-radius: 10px;
+		}
+		.inp_box img{
+		    width: 30px;
+		    height: 30px;
+		    filter: invert(.2)
+		}
+		.inp_box input{
+		    width: 90%;
+		    padding: 5px 15px;
+		    box-sizing: border-box;
+		    font-family: poppins; 
+		    color: #333333;
+		    font-size: 16px;
+		    border: 0;
+		    background: transparent;
+		}
+		button{
+			padding: 10px 15px;
+			margin: 10px 0;
+			background: #202020;
+			color:white;
+			border: 0;
+			border-radius: 5px;
+			transition: .5s;
+		}
+		.data{
+			background: rgba(0, 0, 0, 0.05);
+			display: flex;
+			flex-wrap: wrap;
+			max-height: 100%;
+			overflow: scroll;
+			row-gap: 20px;
+			justify-content: space-between;
+		}
+		.img{
+			width: fit-content;
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+			row-gap: 10px;
+			margin:0px;
+			padding: 20px 0;
+			transition: .5s;
+			border-radius: 5px;
+			height:100px;
+			max-height: 100px;
+			overflow: hidden;
+		}
+		.img:hover{
+			background: #cccccc;
+		}
+		.img img{
+			width: 60px;
+			height: 60px;
+			border-radius: 5px;
+		}
+		.img p{
+			width: 150px;
+			text-align: center;
+			font-family: berlin sans fb;
+		}
+		.screen{
+			position: fixed;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, .5);
+			backdrop-filter: blur(5px);
+			pointer-events: none;
+			opacity: 0;
+			z-index: 2;
+			transition: .5s;
+		}
+		.dialog{
+			width: 40vw;
+			padding: 20px;
+			box-sizing: border-box;
+			background: white;
+			top:25vh;
+			left:30vw;
+			position: fixed;
+			border-radius: 10px;
+			z-index: 3;
+			opacity: 0;
+			pointer-events: none;
+			transition: .5s;
+		}
+		.profile{
+			width: 100px;
+			height: 100px;
+			border-radius: 10px;
+			background: #cccccc;
+		}
+		.inp_dialog{
+			display: flex;
+			row-gap: 20px;
+			flex-flow: column nowrap;
+			align-items: flex-end;
+		}
+		.inp_dialog .inp_box{
+			margin: 0;
+		}
+		.inp_dialog input{
+			width: 100%;
+		}
+		.inp_dialog button{
+			width: fit-content;
+		}
+	</style>
+</head>
+<body>
+	<div class="screen"></div>
+	<div class="dialog">
+		<div class="inp_dialog">
+			<div class="inp_box">
+				<img src="Img/section.png">
+				<input placeholder="Roll no." id="roll">
+			</div>
+			<div class="inp_box">
+				<img src="Img/person.png">
+				<input placeholder="Full Name" id="name">
+			</div>
+			<div class="flex">
+				<button onclick="$('#file').click();">Upload Image</button>
+				<button onclick="addStudent()">Add Student</button>
+			</div>
+		</div>
+	</div>
+	<div class="banner">
+		<div class="icon" style="background-color: transparent;background-image: url(Img/left.png);"></div>
+		<div class="flex">
+			<div class="icon" onclick="perm()" onclick="perm()"></div>
+			<div class="icon" style="background-image: url(Img/delete.png" onclick="del()"></div>
+			<div class="icon add" style="background-image: url(Img/add.png" onclick="showDialog()"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="form">
+			<div class="inp_box">
+				<img src="Img/people.png">
+				<input placeholder="Institution" id="inst">
+			</div>
+			<div class="inp_box">
+				<img src="Img/search.png">
+				<input placeholder="Section" id="sec">
+			</div>
+			<div class="inp_box">
+				<img src="Img/lock.png">
+				<input placeholder="Passcode" type="password" id="psw">
+			</div>
+			<button onclick="search()">Search</button>
+		</div>
+		<div id="img" style="display: none;">
+			<div class="img">
+				<img>
+				<p>Amar Kumar Sahu</p>
+			</div>
+		</div>
+		<div class="data">
+			
+		</div>
+	</div>
+	<input type="file" id="file" style="display: none;">
+</body>
+<script>
+	var obj = {}, inst = "", sec = "", index, rl;
+	function $(val){
+		return document.querySelector(val);
+	}
+	$(".container").style.height = "calc(100vh - " + $(".banner").offsetHeight + "px" + ")";
+	$(".container").style.top = $(".banner").offsetHeight + "px";
+	function addData(){
+		$(".data").innerHTML = "";
+		Object.keys(obj["data"]).forEach((roll, i) => {
+			let div = document.createElement("div");
+			div.innerHTML = $("#img").innerHTML;
+			div.children[0].children[0].src = `https://anvpy.pythonanywhere.com/faces/${inst}/${sec}/${roll}.jpg`
+			div.children[0].children[1].innerHTML = obj["data"][roll] + ` (${roll})`;
+			div.addEventListener("click", () => {
+				if(index != null) $(".data").children[index].style.background = "transparent";
+				div.style.background = "#cccccc";
+				rl = roll;
+				index = i;
+			});
+			$(".data").appendChild(div);
+		});
+	}
+	function del(){
+		if(rl != null){
+			var formData = new FormData();
+    		formData.append("roll", rl);
+    		formData.append("inst", inst);
+    		formData.append("sec", sec);
+			fetch("https://anvpy.pythonanywhere.com/del", {           
+		        method: "POST",
+		        body: formData
+		    })
+		    .then(response => response.text())
+		    .then(data => {
+		    	if(data == "-1"){
+		    		alert("Invalid data");
+		    	}
+		    	else{
+		    		alert(data);
+		    	}
+		    })
+		    .catch(error => alert(error));
+		}
+	}
+	function perm(){
+		if(rl != null){
+			var formData = new FormData();
+    		formData.append("roll", rl);
+    		formData.append("inst", inst);
+    		formData.append("sec", sec);
+			fetch("https://anvpy.pythonanywhere.com/perm", {           
+		        method: "POST",
+		        body: formData
+		    })
+		    .then(response => response.text())
+		    .then(data => {
+		    	if(data == "-1"){
+		    		alert("Invalid data");
+		    	}
+		    	else{
+		    		alert(data);
+		    	}
+		    })
+		    .catch(error => alert(error));
+		}
+	}
+	function search(){
+		inst = $("#inst").value.toUpperCase();
+		sec = $("#sec").value.toUpperCase();
+		var psw = $("#psw").value.toUpperCase();
+		var formData = new FormData();
+    	formData.append("inst", inst);
+    	formData.append("sec", sec);
+    	formData.append("psw", psw);
+		fetch("https://anvpy.pythonanywhere.com/data", {           
+	        method: "POST",
+	        body: formData
+	    })
+	    .then(response => response.text())
+	    .then(data => {
+	    	if(data == "-1"){
+	    		alert("Invalid data");
+	    	}
+	    	else if(data == "0"){
+	    		alert("Wrong key");
+	    	}
+	    	else{
+	    		$(".add").style.opacity = "1";
+	    		obj = JSON.parse(data);
+	    		addData();
+	    	}
+	    })
+	    .catch(error => alert(error));
+	}
+	function addStudent(){
+		if($("#file").files.length == 0){
+			alert("Upload an image");
+			return;
+		}
+		if(($("#file").files[0].size / 1024) >= 4 * 1024){
+			alert("Upload image less than 4 MB.");
+			return;
+		}
+		var rl = $("#roll").value.toUpperCase();
+		try{
+			rl = parseInt(rl).toString();
+		}catch{
+			alert("Invalid roll");
+			return;
+		}
+		var name = $("#name").value.toUpperCase();
+
+		if(inst.trim() == "" | sec.trim() == "" | rl.trim() == "" | name.trim() == ""){
+			alert("Some of the fields are empty");
+		}
+		var formData = new FormData();
+    	formData.append("image", $("#file").files[0]);
+    	formData.append("inst", inst);
+    	formData.append("sec", sec);
+    	formData.append("roll", rl);
+    	formData.append("name", name);
+    	fetch("https://anvpy.pythonanywhere.com/update", {           
+	        method: "POST",
+	        body: formData
+	    })
+	    .then(response => response.text())
+	    .then(data => {
+	        alert("added");
+	    })
+	    .catch(error => err(error));
+	}
+	function showDialog(){
+		$(".screen").style = "opacity:1; pointer-events: auto;";
+		$(".dialog").style = "opacity:1; pointer-events: auto;";
+	}
+	$(".screen").addEventListener("click", () => {
+		$(".screen").style = "";
+		$(".dialog").style = "";
+	});
+</script>
+</html>
